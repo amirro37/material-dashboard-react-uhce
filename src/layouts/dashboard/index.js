@@ -18,7 +18,7 @@ import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-
+import { useEffect, useState } from "react";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -36,7 +36,28 @@ import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
+  const [activeUsers, setActiveUsers] = useState(null);
 
+  useEffect(() => {
+    async function load() {
+      try {
+        // IMPORTANT: replace this URL with your actual Catalyst Basic I/O invoke URL
+        const res = await fetch("https://project-rainfall-910275398.development.catalystserverless.com/server/metrics", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ metric_key: "users.active.total" }),
+        });
+
+        const data = await res.json();
+        setActiveUsers(data?.value_number ?? null);
+      } catch (e) {
+        setActiveUsers(null);
+      }
+    }
+
+    load();
+  }, []);
+ 
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -60,9 +81,9 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                title="Active Users"
+                icon="person"
+                count={activeUsers === null ? "…" : activeUsers}
                 percentage={{
                   color: "success",
                   amount: "+3%",
