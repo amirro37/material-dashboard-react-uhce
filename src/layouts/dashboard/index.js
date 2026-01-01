@@ -38,12 +38,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
-                count={281}
+                title="Active Users"
+                count={4213}
                 percentage={{
                   color: "success",
-                  amount: "+55%",
-                  label: "than last week",
+                  amount: "+-%",
+                  label: "Just updated",
                 }}
               />
             </MDBox>
@@ -52,12 +52,12 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
+                title="Suspended"
+                count="100"
                 percentage={{
                   color: "success",
-                  amount: "+3%",
-                  label: "than last month",
+                  amount: "+420%",
+                  label: "Just updated",
                 }}
               />
             </MDBox>
@@ -67,12 +67,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
+                title="Locked Out"
                 count="34k"
                 percentage={{
                   color: "success",
                   amount: "+1%",
-                  label: "than yesterday",
+                  label: "Total,
                 }}
               />
             </MDBox>
@@ -82,7 +82,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Followers"
+                title="Deactivated"
                 count="+91"
                 percentage={{
                   color: "success",
