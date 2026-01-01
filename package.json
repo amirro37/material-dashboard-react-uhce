@@ -24,7 +24,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false react-scripts build",
+    "build": "bash -lc 'set -o pipefail; CI=false react-scripts build 2>&1 | tee build.log'",
+    "build:debug": "bash -lc 'set -o pipefail; CI=false react-scripts build 2>&1 | tee build.log; ec=${PIPESTATUS[0]}; echo \"\\n---- build.log tail ----\"; tail -n 200 build.log; exit $ec'",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
