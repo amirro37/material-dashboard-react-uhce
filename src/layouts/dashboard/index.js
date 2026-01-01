@@ -2,15 +2,6 @@
 =========================================================
 * Material Dashboard 2 React - v2.2.0
 =========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
 // @mui material components
@@ -18,7 +9,7 @@ import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import { useEffect, useState } from "react";
+
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -36,28 +27,7 @@ import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
-  const [activeUsers, setActiveUsers] = useState(null);
 
-  useEffect(() => {
-    async function load() {
-      try {
-        // IMPORTANT: replace this URL with your actual Catalyst Basic I/O invoke URL
-        const res = await fetch("https://project-rainfall-910275398.development.catalystserverless.com/server/metrics", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ metric_key: "users.active.total" }),
-        });
-
-        const data = await res.json();
-        setActiveUsers(data?.value_number ?? null);
-      } catch (e) {
-        setActiveUsers(null);
-      }
-    }
-
-    load();
-  }, []);
- 
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -73,7 +43,7 @@ function Dashboard() {
                 percentage={{
                   color: "success",
                   amount: "+55%",
-                  label: "than lask week",
+                  label: "than last week",
                 }}
               />
             </MDBox>
@@ -81,9 +51,9 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                title="Active Users"
-                icon="person"
-                count={activeUsers === null ? "…" : activeUsers}
+                icon="leaderboard"
+                title="Today's Users"
+                count="2,300"
                 percentage={{
                   color: "success",
                   amount: "+3%",
@@ -123,6 +93,7 @@ function Dashboard() {
             </MDBox>
           </Grid>
         </Grid>
+
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
@@ -164,6 +135,7 @@ function Dashboard() {
             </Grid>
           </Grid>
         </MDBox>
+
         <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
